@@ -7,22 +7,23 @@ import HeaderButton from './HeaderButtons';
 const useStyle = makeStyles({
     header: {
         backgroundColor: '#2874f0',
-        height: 55
+        height: 55,
+        boxShadow: 'none'
     },
     container: {
         marginLeft: '13%'
     },
     logo: {
-        width: 75
+        width: 65
     },
     subheader: {
         display: 'flex',
         marginTop: -7
     },
     title: {
-        fontSize: 11,
+        fontSize: 13,
         fontStyle: 'italic',
-        fontWeight: 'bold'
+        fontWeight: 600
     },
     sublogo: {
         width: 10,
@@ -36,7 +37,7 @@ const ToolBar = withStyles({
     }
 })(Toolbar);
 
-const NavBar = () => {
+const Header = () => {
     const classes = useStyle();
     const logoURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png';
     const subURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png';
@@ -59,4 +60,4 @@ const NavBar = () => {
 }
 
 
-export default NavBar;
+export default Header;

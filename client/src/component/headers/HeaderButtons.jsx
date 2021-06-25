@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         textTransform: 'none',
         fontWeight: 600,
         fontSize: 14,
-        padding: '3px 30px',
+        padding: '3px 37px',
         boxShadow: 'none'
     },
     cart: {
