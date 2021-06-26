@@ -14,10 +14,10 @@ const useStyles = makeStyles({
     },
     titles_section: {
         fontSize: 12,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom: 5,
+        borderBottom: 2
     }
-
-
 });
 
 const NavBar = () => {

@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, makeStyles, Box, Typography, withStyles } from '@material-ui/core';
 import SearchBar from './SearchBar';
 import HeaderButton from './HeaderButtons';
+import { Link } from 'react-router-dom';
 
 
 const useStyle = makeStyles({
@@ -11,19 +12,21 @@ const useStyle = makeStyles({
         boxShadow: 'none'
     },
     container: {
-        marginLeft: '13%'
+        marginLeft: '13%',
+        textDecoration: 'none'
     },
     logo: {
-        width: 65
+        width: 65,
     },
     subheader: {
         display: 'flex',
-        marginTop: -7
+        marginTop: -7,
     },
     title: {
         fontSize: 13,
         fontStyle: 'italic',
-        fontWeight: 600
+        fontWeight: 600,
+        color: 'white',
     },
     sublogo: {
         width: 10,
@@ -44,13 +47,13 @@ const Header = () => {
     return (
         <AppBar className={classes.header}>
             <ToolBar>
-                <Box className={classes.container}>
+                <Link to='/' className={classes.container}>
                     <img src={logoURL} alt='logo' className={classes.logo} />
                     <Box className={classes.subheader}>
                         <Typography className={classes.title}>Explore <i style={{ color: 'yellow' }}>Plus</i></Typography>
                         <img src={subURL} alt='sublogo' className={classes.sublogo} />
                     </Box>
-                </Box>
+                </Link>
                 <SearchBar />
                 <HeaderButton />
             </ToolBar>
