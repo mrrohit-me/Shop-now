@@ -1,28 +1,10 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Box, makeStyles, Typography } from '@material-ui/core'
+import { Box, makeStyles, Typography, Button } from '@material-ui/core'
+import Countdown from 'react-countdown';
 
 //component
 import { products } from "../constants/NavData";
-
-
-const useStyles = makeStyles({
-    container: {
-        backgroundColor: '#ffff',
-        margin: '10px 2px'
-    },
-    image: {
-        width: 150,
-        height: 150,
-    },
-    // deal: {
-    //     marg
-    // },
-    dealTitle: {
-        textAlign: 'left',
-        padding: 10
-    }
-});
 
 const responsive = {
     desktop: {
@@ -41,12 +23,82 @@ const responsive = {
         slidesToSlide: 1 // optional, default to 1.
     }
 };
-const Slide = () => {
+
+
+const useStyles = makeStyles({
+    container: {
+        backgroundColor: '#ffff',
+        margin: '10px 2px',
+    },
+    image: {
+        width: 140,
+        height: 150,
+        marginBottom : 5
+    },
+    deal: {
+        textAlign: 'left',
+        display : 'flex',
+        borderBottomStyle : 'solid',
+        borderBottom: 0.5,
+        borderBottomColor : 'lightgrey',
+        padding: '15px 15px',
+        marginBottom : 20,
+    },
+    dealTitle: {
+        fontWeight: '600',
+        fontSize : 22
+    },
+    clockImage : {
+        width :22,
+        margin: '5px 4px 2px 30px'
+    },
+    timer : {
+        color:'#7f7f7f',
+        display:'flex',
+        alignItems:'center'
+    },
+    product_details : {
+        marginTop: 3,
+        fontSize : 14
+    },
+    btn : {
+        marginLeft: 'auto', 
+        borderRadius: 2, 
+        backgroundColor: '#2874f0',
+        color:'white',
+        fontSize : 13
+    },
+    product_wrapper : {
+        padding : '15px 15px 10px'
+    },
+});
+
+
+const Slide = ({title, timer}) => {
+    const renderer = ({ hours, minutes, seconds }) => {
+        const hour = (hours > 9) ? hours : '0' + hours
+        const min = (minutes > 9) ? minutes : '0' + minutes
+        const sec = (seconds > 9) ? seconds : '0' + seconds
+        return (
+            <span className={classes.timer}>{hour}:{min}:{sec} Left</span>);
+    }
     const classes = useStyles();
+    const timerURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg';
     return (
         <Box className={classes.container}>
             <Box className={classes.deal}>
-                <Typography className={classes.dealTitle}>Deal of the day</Typography>
+                <Typography className={classes.dealTitle}> {title}</Typography>
+                { 
+                    timer &&
+                    <>
+                        <img src={timerURL} className={classes.clockImage} />
+                        <Countdown
+                            date={Date.now() + 14 * 1000 * 3600}
+                            renderer={renderer}
+                        />
+                        <Button variant="contained" className={classes.btn}>View All</Button>
+                    </>
+                }
             </Box>
             <Carousel
                 responsive={responsive}
@@ -63,11 +115,16 @@ const Slide = () => {
             >
                 {
                     products.map(product => (
-                        <img key={product.id} src={product.url} className={classes.image} />
+                       <Box className={classes.product_wrapper}>
+                            <img key={product.id} src={product.url} className={classes.image} />
+                            <Typography className={classes.product_details} style={{fontWeight : 600}}>{product.title.shortTitle}</Typography>
+                            <Typography className={classes.product_details} style={{color : 'green'}}>{product.discount}</Typography>
+                            <Typography className={classes.product_details} style={{opacity: 0.7}}>{product.tagline}</Typography>
+                       </Box>
                     ))
                 }
 
-            </Carousel>
+            </Carousel>  
         </Box>
     )
 }
