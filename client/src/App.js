@@ -3,10 +3,11 @@ import Header from './component/headers/Header';
 import Home from './component/home/Home';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Cart from './component/carts/Cart'
+import {TemplateProvider} from './template/TemplateProvider';
 
 function App() {
 	return (
-		<div className="App">
+		<TemplateProvider>
 			<BrowserRouter>
 				<Header />
 				<Switch>
@@ -14,7 +15,7 @@ function App() {
 					<Route exact path='/cart' component={Cart} />
 				</Switch>
 			</BrowserRouter>
-		</div>
+		</TemplateProvider>
 	);
 }
 
